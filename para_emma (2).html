@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Emma 💜🐱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 900px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeIn 2s ease-in;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in 1s forwards;
+        }
+
+        .heart-container {
+            position: relative;
+            margin: 40px auto;
+            opacity: 0;
+            animation: fadeIn 2s ease-in 2s forwards;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background: #ff1744;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.2);
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background: #ff1744;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 50px;
+            top: 0;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .flower {
+            position: fixed;
+            font-size: 40px;
+            animation: fall 8s linear infinite;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .button {
+            background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .stethoscope {
+            font-size: 60px;
+            margin: 20px;
+            display: inline-block;
+            animation: swing 2s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .letter {
+            background: white;
+            color: #667eea;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 30px auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: left;
+            line-height: 2;
+            font-size: 1.1em;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 30px;
+            font-size: 1.3em;
+        }
+
+        /* Cat styles */
+        .cat {
+            position: fixed;
+            font-size: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            user-select: none;
+        }
+
+        .cat:hover {
+            transform: scale(1.3);
+        }
+
+        .cat:active {
+            transform: scale(1.5) rotate(15deg);
+        }
+
+        .meow {
+            position: fixed;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff1744;
+            animation: meowFloat 2s ease-out forwards;
+            z-index: 101;
+            pointer-events: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes meowFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+        }
+
+        .cat-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .cat-instruction {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .love-counter {
+            font-size: 2em;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .bounce {
+            animation: bounce 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Para Emma 💜🐱</h1>
+        <p class="subtitle">Haz clic en el corazón para comenzar...</p>
+        
+        <div class="heart-container">
+            <div class="heart" id="mainHeart" onclick="revealMessage()"></div>
+        </div>
+
+        <div id="message1" class="message hidden">
+            <div class="stethoscope">🩺</div>
+            <p>Emma, así como tú cuidas corazones en tu carrera de enfermería...</p>
+            <p>Hay alguien que quiere cuidar el tuyo con todo su amor 💜</p>
+            <button class="button" onclick="showNext(2)">Continuar...</button>
+        </div>
+
+        <div id="message2" class="message hidden">
+            <p style="font-size: 2em;">🌸 💐 🌺</p>
+            <p>Cada flor que ves caer representa un motivo por el que eres especial...</p>
+            <p>Tu dedicación, tu bondad, tu sonrisa que ilumina todo...</p>
+            <button class="button" onclick="showNext(3)">Siguiente...</button>
+        </div>
+
+        <div id="message3" class="message hidden">
+            <div class="cat-container">
+                <p class="cat-instruction">¡Sé que amas los gatitos! 🐱</p>
+                <p class="cat-instruction">Haz clic en cada gatito para darle amor 💕</p>
+                <div class="love-counter" id="loveCounter">Amor dado: 0 💜</div>
+                <p style="font-size: 0.9em; margin-top: 10px;">(Dale amor a los 5 gatitos para continuar)</p>
+            </div>
+        </div>
+
+        <div id="message4" class="message hidden">
+            <p>Desde que te conocí, mi corazón late diferente</p>
+            <p>Como si supiera que encontró algo verdadero ❤️</p>
+            <p>Aunque la distancia nos separe, mis sentimientos son reales</p>
+            <p>Tan reales como el amor que le diste a cada gatito 🐱💜</p>
+            <button class="button" onclick="showLetter()">Leer carta final...</button>
+        </div>
+
+        <div id="finalLetter" class="letter hidden">
+            <p>Querida Emma,</p>
+            <p>Sé que esto puede parecer inesperado, pero quería hacer algo especial para mostrarte lo mucho que significas para mí.</p>
+            <p>Tu pasión por la enfermería me inspira. Ver cómo te dedicas a cuidar a otros me hace admirarte aún más. 🩺</p>
+            <p>Y saber que amas a los gatitos tanto como yo... bueno, eso solo me hace querer conocerte más. 🐱💜</p>
+            <p>Me encantaría compartir más momentos contigo, hablar de todo, desde tus sueños de enfermería hasta los videos más tiernos de gatos.</p>
+            <p>¿Me darías la oportunidad de demostrarte que los sentimientos verdaderos no conocen fronteras?</p>
+            <p class="signature">Con todo mi corazón 💜<br>Para ti, Emma 🌸</p>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="button" onclick="celebrate()">¡Me encantó! 💕</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let loveCount = 0;
+        const catsNeeded = 5;
+        let cats = [];
+
+        // Create falling flowers
+        function createFlower() {
+            const flowers = ['🌸', '🌺', '🌷', '🌹', '💐', '🌻', '💜'];
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + '%';
+            flower.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            flower.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(flower);
+            
+            setTimeout(() => flower.remove(), 13000);
+        }
+
+        // Create flowers continuously
+        setInterval(createFlower, 800);
+        
+        // Initial flowers
+        for(let i = 0; i < 10; i++) {
+            setTimeout(createFlower, i * 300);
+        }
+
+        function revealMessage() {
+            document.getElementById('message1').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('message1').classList.add('show');
+            }, 100);
+        }
+
+        function showNext(num) {
+            // Hide previous
+            const current = document.getElementById('message' + (num - 1));
+            current.style.opacity = '0';
+            
+            setTimeout(() => {
+                current.classList.add('hidden');
+                const next = document.getElementById('message' + num);
+                next.classList.remove('hidden');
+                setTimeout(() => {
+                    next.classList.add('show');
+                    if(num === 3) {
+                        createCats();
+                    }
+                }, 100);
+            }, 500);
+        }
+
+        function createCats() {
+            const catEmojis = ['🐱', '😺', '😸', '😻', '🐈'];
+            const positions = [
+                {left: '10%', top: '20%'},
+                {left: '80%', top: '30%'},
+                {left: '15%', top: '70%'},
+                {left: '75%', top: '65%'},
+                {left: '45%', top: '85%'}
+            ];
+
+            for(let i = 0; i < catsNeeded; i++) {
+                setTimeout(() => {
+                    const cat = document.createElement('div');
+                    cat.className = 'cat';
+                    cat.textContent = catEmojis[i];
+                    cat.style.left = positions[i].left;
+                    cat.style.top = positions[i].top;
+                    cat.dataset.loved = 'false';
+                    cat.onclick = function(e) {
+                        giveLove(this, e);
+                    };
+                    document.body.appendChild(cat);
+                    cats.push(cat);
+                }, i * 300);
+            }
+        }
+
+        function giveLove(cat, event) {
+            if(cat.dataset.loved === 'false') {
+                cat.dataset.loved = 'true';
+                loveCount++;
+                
+                // Create meow text
+                const meow = document.createElement('div');
+                meow.className = 'meow';
+                const messages = ['Miau! 💕', 'Ronroneo 💜', 'Purr 💖', 'Miau miau 💝', 'Amor! 💗'];
+                meow.textContent = messages[Math.floor(Math.random() * messages.length)];
+                meow.style.left = event.pageX + 'px';
+                meow.style.top = event.pageY + 'px';
+                document.body.appendChild(meow);
+                
+                setTimeout(() => meow.remove(), 2000);
+                
+                // Animate cat
+                cat.classList.add('bounce');
+                setTimeout(() => cat.classList.remove('bounce'), 500);
+                
+                // Update counter
+                const counter = document.getElementById('loveCounter');
+                counter.textContent = `Amor dado: ${loveCount} 💜`;
+                counter.classList.add('bounce');
+                setTimeout(() => counter.classList.remove('bounce'), 500);
+                
+                // Check if all cats loved
+                if(loveCount === catsNeeded) {
+                    setTimeout(() => {
+                        // Remove cats
+                        cats.forEach(c => c.remove());
+                        cats = [];
+                        showNext(4);
+                    }, 1000);
+                }
+            }
+        }
+
+        function showLetter() {
+            const message4 = document.getElementById('message4');
+            message4.style.opacity = '0';
+            
+            setTimeout(() => {
+                message4.classList.add('hidden');
+                const letter = document.getElementById('finalLetter');
+                letter.classList.remove('hidden');
+                letter.style.opacity = '0';
+                setTimeout(() => {
+                    letter.style.transition = 'opacity 1s ease';
+                    letter.style.opacity = '1';
+                }, 100);
+            }, 500);
+        }
+
+        function celebrate() {
+            // Create celebration effect with hearts and cats
+            const celebrationItems = ['💜', '💕', '💖', '🐱', '😻', '🌸', '💐'];
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const item = document.createElement('div');
+                    item.textContent = celebrationItems[Math.floor(Math.random() * celebrationItems.length)];
+                    item.style.position = 'fixed';
+                    item.style.fontSize = '30px';
+                    item.style.left = Math.random() * 100 + '%';
+                    item.style.top = Math.random() * 100 + '%';
+                    item.style.animation = 'fadeIn 1s ease-out forwards';
+                    item.style.zIndex = '1000';
+                    document.body.appendChild(item);
+                    
+                    setTimeout(() => item.remove(), 2000);
+                }, i * 50);
+            }
+            
+            setTimeout(() => {
+                alert('¡Gracias Emma! 💜🐱 Esto es solo el comienzo de algo hermoso. Me encantaría seguir conociéndote más...');
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
